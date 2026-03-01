@@ -1,0 +1,10 @@
+{
+  "name": "gtc-frontend",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Static frontend runner for Abgabe",
+  "scripts": {
+    "start": "python3 -m http.server 4173",
+    "start:api": "npm --prefix ../backend start"
+  }
+}

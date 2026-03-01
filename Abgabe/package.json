@@ -1,0 +1,12 @@
+{
+  "name": "gtc-abgabe",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Runner scripts for the Abgabe package",
+  "scripts": {
+    "install:backend": "npm --prefix ./backend install",
+    "start": "npm --prefix ./backend start",
+    "start:backend": "npm --prefix ./backend start",
+    "start:frontend": "python3 -m http.server 4173 --directory ./frontend"
+  }
+}

@@ -11,71 +11,73 @@ Bitte installiere folgende Tools:
 
 - **Node.js** (empfohlen: aktuelle LTS-Version)
 - **npm** (ist mit Node.js dabei)
+- **Python 3** (für den statischen Frontend-Server)
 
 ## 2) Backend starten
 
+### Empfohlener Weg aus dem `Abgabe/`-Ordner
+
 1. Terminal öffnen.
-2. In den Backend-Ordner wechseln:
+2. In den Abgabe-Ordner wechseln.
+3. Backend-Abhängigkeiten installieren:
 
    ```bash
-   cd backend
+   npm run install:backend
    ```
 
-3. Abhängigkeiten installieren:
-
-   ```bash
-   npm install
-   ```
-
-4. Server starten:
+4. Backend starten:
 
    ```bash
    npm start
    ```
 
-5. Kontrolle im Browser (optional):
+### Alternativ direkt im `backend/`-Ordner
 
-   ```
-   http://127.0.0.1:3000/api/health
-   ```
+```bash
+cd backend
+npm install
+npm start
+```
 
-   Wenn alles läuft, sollte ein JSON-Status angezeigt werden.
+Kontrolle im Browser (optional):
 
-   Hinweis: Aus Kompatibilitätsgründen funktioniert auch `http://127.0.0.1:3000/api/status`.
+```
+http://127.0.0.1:3000/api/health
+```
+
+Wenn alles läuft, sollte ein JSON-Status angezeigt werden.
+
+Hinweis: Aus Kompatibilitätsgründen funktioniert auch `http://127.0.0.1:3000/api/status`.
 
 ## 3) Frontend starten
 
-Das Frontend ist statisch und kann z. B. über einen einfachen lokalen Server ausgeliefert werden.
+### Variante A: aus `Abgabe/`
 
-### Variante A: mit Python (einfach)
+```bash
+npm run start:frontend
+```
 
-1. Neues Terminal öffnen.
-2. In den Frontend-Ordner wechseln:
+Danach im Browser öffnen:
 
-   ```bash
-   cd frontend
-   ```
+```
+http://127.0.0.1:4173
+```
 
-3. Server starten:
+### Variante B: direkt im `frontend/`-Ordner mit npm
 
-   ```bash
-   python3 -m http.server 4173
-   ```
+```bash
+cd frontend
+npm start
+```
 
-4. Im Browser öffnen:
-
-   ```
-   http://127.0.0.1:4173
-   ```
-
-### Variante B: Live Server (VS Code)
+### Variante C: Live Server (VS Code)
 
 - `frontend/index.html` mit einer Live-Server-Erweiterung starten.
 
 ## 4) Anwendung testen
 
 - Backend muss auf `http://127.0.0.1:3000` laufen.
-- Zusätzlich muss MySQL laufen und die Datenbank `gtc` mit `backend/sql/init.sql` initialisiert sein.
+- Zusätzlich muss MySQL laufen und die Datenbank `gtc` mit `Abgabe/backend/sql/init.sql` initialisiert sein.
 - Danach Frontend öffnen.
 - Folgende Bereiche prüfen:
   - Status
@@ -91,3 +93,10 @@ Das Frontend ist statisch und kann z. B. über einen einfachen lokalen Server au
 - Die Frontend-API-Basis ist in `frontend/scripts/main.js` als
   `http://127.0.0.1:3000/api` hinterlegt.
 - Falls das Backend nicht erreichbar ist, zeigt das Frontend Fallback-Daten für Currencies/Rates.
+- Falls du im `frontend/`-Ordner die API starten willst, nutze:
+
+  ```bash
+  npm run start:api
+  ```
+
+  Dieser Script startet explizit das Backend aus `../backend` (also aus `Abgabe/backend`).
