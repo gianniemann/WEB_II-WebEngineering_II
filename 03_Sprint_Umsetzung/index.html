@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>GTC Sprint 02 Umsetzung</title>
+        <script src="scripts/main.js"></script>
+    </head>
+    <body onload="init();">
+        <h1>Global Travel Companion</h1>
+        <p>Frontend im einfachen Demo-Stil mit REST-Anbindung.</p>
+
+        <h2>Status</h2>
+        <div id="statusOutput"></div>
+
+        <h2>Currencies</h2>
+        <div id="currenciesOutput"></div>
+
+        <h2>Rates</h2>
+        <div id="ratesOutput"></div>
+
+        <h2>Calculator</h2>
+        <p>
+            Betrag:
+            <input id="sourceAmount" type="number" value="100" step="0.01">
+            Von:
+            <select id="sourceCurrency"></select>
+            Nach:
+            <select id="targetCurrency"></select>
+            <button onclick="calculateAmount();">Berechnen</button>
+        </p>
+        <div id="calculatorOutput"></div>
+
+        <h2>Login</h2>
+        <p>
+            Login: <input id="loginName" type="text" value="max">
+            Passwort: <input id="loginPassword" type="password" value="max123">
+            <button onclick="doLogin();">Login</button>
+        </p>
+        <div id="loginOutput"></div>
+
+        <h2>Neue Transaktion</h2>
+        <p>
+            User Login: <input id="transactionUser" type="text" value="max">
+            Betrag: <input id="transactionAmount" type="number" value="100" step="0.01">
+            Von: <select id="transactionSourceCurrency"></select>
+            Nach: <select id="transactionTargetCurrency"></select>
+            Kurs: <input id="transactionRate" type="number" value="1.03" step="0.0001">
+            <button onclick="createTransaction();">Speichern</button>
+        </p>
+        <div id="transactionFormOutput"></div>
+
+        <h2>Transactions</h2>
+        <div id="transactionsOutput"></div>
+    </body>
+</html>
