@@ -1,10 +1,9 @@
 # Global Travel Companion (GTC)
 
 Dieses Repository enthält den aktuellen Stand für Sprint 01 bis 04.
-Die Umsetzung ist bewusst einfach gehalten (Demo-Stil, kein High-End-Stack).
 
 ## Projektstruktur
-- `03_Sprint_Umsetzung/` Frontend (einfaches HTML + Vanilla JavaScript)
+- `03_Sprint_Umsetzung/` Frontend (HTML + Vanilla JavaScript)
 - `backend/` REST Backend (Node.js + Express + MySQL)
 - `backend/sql/init.sql` SQL-Skript für DB-Initialisierung
 - `04_Test/testprotokoll.md` Testprotokoll Sprint 04
@@ -51,7 +50,7 @@ python -m http.server 8000
 Danach im Browser öffnen:
 - `http://127.0.0.1:8000/03_Sprint_Umsetzung/index.html`
 
-## Bekannte Demo-Logins
+## Bekannte Logins
 - `max / max123`
 - `anna / anna123`
 
@@ -69,6 +68,3 @@ Danach im Browser öffnen:
 
 ## Schritt-für-Schritt Anleitung
 - Siehe `ANLEITUNG_SCHRITT_FUER_SCHRITT.md`
-
-## Hinweis
-Diese Fassung ist auf Verständlichkeit und Nachvollziehbarkeit ausgerichtet.

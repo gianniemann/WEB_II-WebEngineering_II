@@ -1,7 +1,5 @@
 # Schritt-für-Schritt Anleitung: GTC lokal starten
 
-Diese Anleitung ist bewusst einfach gehalten.
-
 ## 1) Welche Tools du brauchst
 
 ## Tool 1: Git
