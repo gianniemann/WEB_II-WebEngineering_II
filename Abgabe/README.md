@@ -5,6 +5,10 @@ Dieser Ordner enthält alles, was für die Abgabe erforderlich ist:
 - `backend/` – Node.js + Express + MySQL API
 - `frontend/` – HTML/CSS/JS Oberfläche
 
+## ⚠️ Wichtig (zuerst erledigen)
+
+Bevor du das Backend startest, setze bitte die **DB-Credentials** in der Datei `Abgabe/backend/src/db.js` (z. B. Host, User, Passwort, Datenbankname).
+
 ## 1) Voraussetzungen
 
 Bitte installiere folgende Tools:
