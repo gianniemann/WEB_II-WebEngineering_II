@@ -57,11 +57,8 @@ python --version
 ## 2) Projekt auf deinen Computer holen
 
 ```bash
-git clone <DEIN_REPO_LINK>
 cd WEB_II-WebEngineering_II
 ```
-
-> Falls du das Projekt schon hast: nur in den Projektordner wechseln.
 
 ---
 
