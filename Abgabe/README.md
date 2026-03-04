@@ -104,3 +104,7 @@ npm start
   ```
 
   Dieser Script startet explizit das Backend aus `../backend` (also aus `Abgabe/backend`).
+## 6) Testprotokoll Sprint 04
+
+- Das geforderte Testprotokoll mit mindestens zehn Testfällen befindet sich in `Abgabe/testprotokoll_sprint04.md`.
+
