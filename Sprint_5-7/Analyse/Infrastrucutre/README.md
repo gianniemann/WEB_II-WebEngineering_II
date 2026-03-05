@@ -5,7 +5,7 @@ Diese Anleitung übersetzt die offenen Punkte aus dem letzten Chat in eine **kon
 ## Aufbau der Anleitung
 
 1. **Phase 1 – Infrastruktur-Basis (3 Plattformen)**
-   - Datei: `Phase_1_Azure_Ubuntu_DB.md`
+   - Datei: `Phase_1_Azure_Ubuntu_DB.md` (mit Verweisen auf Phase 1.1 bis 1.4)
 2. **Phase 2 – Netzwerk & Security-Nachweis (pfSense/Firewall)**
    - Datei: `Phase_2_Netzwerk_und_Security.md`
 3. **Phase 3 – API-QA gegen produktionsnahe Endpunkte**

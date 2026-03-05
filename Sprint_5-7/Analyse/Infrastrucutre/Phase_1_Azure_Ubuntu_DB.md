@@ -1,62 +1,38 @@
 # Phase 1 – Infrastruktur-Basis (Frontend/Backend/DB getrennt)
 
-## 1) Ziel-Umgebung festlegen
+Diese Datei ist jetzt die **Startseite für Phase 1**.
+Die ursprüngliche Kurzfassung wurde in mehrere, anfängerfreundliche Teilphasen aufgeteilt.
 
-- **Frontend-Host**: URL und Deployment-Methode festlegen.
-- **Backend-Host**: Public IP/FQDN + offener API-Port (z. B. 3000) festlegen.
-- **DB-Host**: private IP + MySQL-Port 3306 (nur intern).
+## Neue Teilphasen (detailliert)
 
-> Ergebnis: Eine Tabelle mit Hostname, Rolle, IP, Ports, Zugang.
+1. **Phase 1.1 xyz – Lokale MySQL-Umgebung auf Windows (Start bei 0)**
+   Datei: `Phase_1.1_xyz_MySQL_Lokal.md`
 
-## 2) Datenbank-Host vorbereiten (Plattform C)
+2. **Phase 1.2 yzx – Ubuntu-Backend-VM in VMware + pfSense-Grundaufbau**
+   Datei: `Phase_1.2_yzx_Ubuntu_VM_und_pfSense.md`
 
-1. MySQL/MariaDB installieren.
-2. Schema initialisieren mit:
-   - `Abgabe/backend/sql/init.sql`
-3. Dedizierten DB-User anlegen (nicht root) nur mit benötigten Rechten auf die Projekt-DB.
-4. MySQL-Bind-Adresse prüfen:
-   - Für Backend-Zugriff aus Netzwerk passend setzen (z. B. private NIC).
-5. Sicherstellen, dass lokale Firewall nur Backend-IP auf 3306 zulässt.
+3. **Phase 1.3 zxy – Azure-Umgebung anbinden (Frontend + sichere Erreichbarkeit)**
+   Datei: `Phase_1.3_zxy_Azure_Anbindung.md`
 
-## 3) Backend-Host vorbereiten (Plattform B)
+4. **Phase 1.4 – Betrieb, Backup und Wiederanlauf (optional, empfohlen)**
+   Datei: `Phase_1.4_Betrieb_Checkliste_und_Backup.md`
 
-1. Node.js (LTS) und npm installieren.
-2. Repository deployen/pullen.
-3. Im Ordner `Abgabe/backend` Abhängigkeiten installieren:
-   - `npm ci` (oder `npm install`)
-4. `.env` aus `.env.example` ableiten und produktionsnah befüllen:
-   - DB-Host/IP (private Adresse)
-   - DB-User/Passwort
-   - API-Port
-   - `ALLOWED_ORIGIN` (Frontend-URL)
-   - API-Key für schreibende Endpunkte
-5. API starten (z. B. systemd/pm2) und Autostart aktivieren.
-6. Health-Check manuell ausführen:
-   - `GET /api/health` (oder kleinster verfügbarer GET-Endpunkt)
+---
 
-## 4) Frontend-Host vorbereiten (Plattform A)
+## Warum diese Aufteilung?
 
-1. Statische Dateien aus `Abgabe/frontend` deployen.
-2. Falls Build notwendig ist: Build-Prozess ausführen und Artefakt deployen.
-3. Im UI die API-Konfiguration setzen:
-   - Base URL = Backend-Live-URL
-   - API-Key = gültiger Schlüssel
-4. Browser-Test:
-   - Lesen (GET) funktioniert.
-   - Geschützte Schreib-Operationen funktionieren nur mit gültigem Key.
+Die Reihenfolge ist nun für Einsteiger klarer:
 
-## 5) Erste End-to-End-Verifikation
+1. Zuerst Datenbank stabil aufsetzen (MySQL).
+2. Danach Ubuntu-Backend + Netzwerk über pfSense.
+3. Anschließend Azure als öffentliche Schicht integrieren.
+4. Optional den Betrieb mit Backup/Restore absichern.
 
-1. Im Frontend einen Lese-Use-Case ausführen.
-2. Einen Schreib-Use-Case ausführen.
-3. Im Backend prüfen:
-   - Request-Logs werden geschrieben.
-   - Keine unerwarteten Fehler im Error-Log.
-4. In der DB prüfen:
-   - Änderung ist persistiert.
+---
 
-## Exit-Kriterien Phase 1
+## Minimale Erfolgskriterien für Phase 1 gesamt
 
-- FE/BE/DB laufen auf drei getrennten Plattformen.
-- Frontend zeigt auf Live-Backend.
-- Backend spricht erfolgreich mit der DB.
+- FE/BE/DB sind getrennt und eindeutig dokumentiert.
+- Backend spricht zuverlässig mit der DB.
+- Frontend erreicht das Live-Backend.
+- Sicherheitsregeln sind aktiv (mindestens Firewall/UFW/pfSense).
