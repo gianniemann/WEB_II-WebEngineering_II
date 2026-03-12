@@ -32,7 +32,7 @@ Bitte installiere folgende Tools:
 
 Wichtige Variablen in `.env`:
 - `DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASSWORD`, `DB_NAME`
-- `API_KEY` (für geschützte Schreib-Endpunkte)
+- `API_KEY` (**Pflicht** für geschützte Schreib-Endpunkte; ohne Wert liefern diese `503`)
 - `ALLOWED_ORIGIN`
 
 Kontrolle im Browser:

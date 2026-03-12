@@ -12,6 +12,9 @@ Diese Anleitung übersetzt die offenen Punkte aus dem letzten Chat in eine **kon
    - Datei: `Phase_3_QA_und_API_Tests.md`
 4. **Phase 4 – Abgabe-Artefakte & Runbook-Konsolidierung**
    - Datei: `Phase_4_Abgabe_und_Runbook.md`
+5. **Bekannte Probleme & Quick-Fixes (2. Setup-Durchlauf)**
+   - Datei: `Bekannte_Probleme_und_Quickfixes.md`
+
 
 ---
 
