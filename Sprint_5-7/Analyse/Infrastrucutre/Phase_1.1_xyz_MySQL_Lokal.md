@@ -21,7 +21,7 @@ Wenn du fertig bist, ist folgendes erreicht:
 1. **Windows-Adminrechte** auf deinem Rechner.
 2. Projekt liegt lokal vor (inkl. `Abgabe/backend/sql/init.sql`).
 3. VMware ist installiert (für spätere Ubuntu-VM).
-4. Du kennst grob dein Heim-/Lab-Netz (z. B. `192.168.178.0/24`).
+4. Du kennst grob dein Heimnetz bzw. lokales VM-Netz (z. B. `192.168.178.0/24`).
 
 Tipp für Anfänger:
 - Notiere alle IPs/Passwörter in einer kleinen Tabelle (z. B. OneNote/Excel), damit du später nichts suchst.
@@ -84,12 +84,12 @@ Standardmäßig erlaubt MySQL lokale Zugriffe, aber für die Ubuntu-VM muss der 
 
 1. Öffne die MySQL-Konfigurationsdatei (`my.ini`) unter Windows.
 2. Suche `bind-address`.
-3. Setze für dein Lab-Setup z. B.:
+3. Setze für dein lokales Setup z. B.:
    - `bind-address = 0.0.0.0`
 4. MySQL-Dienst neu starten (`services.msc`).
 
 Sicherheitshinweis:
-- `0.0.0.0` ist okay im privaten Lab, **wenn** du die Windows-Firewall korrekt einschränkst (nächster Schritt).
+- `0.0.0.0` ist okay im privaten lokalen Netz, **wenn** du die Windows-Firewall korrekt einschränkst (nächster Schritt).
 
 ---
 
@@ -133,7 +133,7 @@ Wenn Tabellen aus `init.sql` sichtbar sind, ist die Basis korrekt.
 
 Notiere diese Werte für Phase 1.2 und 1.3:
 
-- DB-Host-IP (Windows-Host im Lab-Netz)
+- DB-Host-IP (Windows-Host im lokalen Netz)
 - DB-Port (`3306`)
 - DB-Name
 - DB-Benutzer
@@ -159,4 +159,4 @@ Ohne diese Daten kann das Backend später nicht starten.
 - MySQL läuft stabil auf Windows.
 - `init.sql` wurde erfolgreich importiert.
 - Benutzer `webapp_user` (oder eigener Name) funktioniert.
-- Zugriff auf 3306 ist auf dein Lab-Netz bzw. Ubuntu-VM eingeschränkt.
+- Zugriff auf 3306 ist auf dein lokales Netz bzw. Ubuntu-VM eingeschränkt.

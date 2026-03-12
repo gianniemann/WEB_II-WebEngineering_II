@@ -11,21 +11,32 @@ Am Ende läuft:
 - Eine Ubuntu-VM in VMware.
 - Node.js-Backend auf Ubuntu.
 - Verbindung Ubuntu -> MySQL (Windows-Host) funktioniert.
-- pfSense ist als zentrale Firewall/Router im Lab integriert.
+- pfSense ist als zentrale Firewall/Router im lokalen VM-Netz integriert.
 
 ---
 
-## 1) Netzwerkplan (einfaches Lab-Design)
+## 1) Netzwerkplan (einfaches lokales Design)
 
 Für Anfänger ist ein klarer Plan extrem wichtig. Beispiel:
 
 - **Windows Host** (MySQL): `192.168.10.10`
 - **pfSense LAN**: `192.168.10.1`
 - **Ubuntu VM (Backend)**: `192.168.10.20`
-- **später Azure/Internet**: Zugriff auf Backend nur über Reverse-Proxy auf `443` (Backend `3000` bleibt intern)
+- **später Azure/Internet**: Zugriff auf Backend über Azure-API-Einstieg via Site-to-Site-VPN (Backend `3000` bleibt intern)
 
 Hinweis:
 - Nutze für alle internen Systeme ein privates Netz (z. B. `192.168.10.0/24`).
+
+### Wichtige Anpassung für dein lokales Setup
+
+Die IPs in dieser Anleitung sind **Beispielwerte**. Wenn deine VMware-/pfSense-Konfiguration andere Netze verwendet (z. B. `192.168.178.0/24`, `10.0.0.0/24`), musst du alle folgenden Werte konsistent anpassen:
+
+- `DB_HOST` in der Backend-`.env`
+- Firewall-Regeln in Windows, UFW und pfSense
+- VPN-Routen und erlaubte Quellnetze (Azure VNet/VPN-Subnetz)
+
+Empfehlung:
+- Vergib für **Windows-Host (MySQL)**, **Ubuntu-VM** und **pfSense-LAN** feste IPs (DHCP-Reservierung oder statisch), damit Regeln stabil bleiben.
 
 ---
 
@@ -38,7 +49,7 @@ Hinweis:
    - 4 GB RAM
    - 40 GB Disk
 4. Netzwerkadapter:
-   - Erstmal in das gewünschte interne Lab-Netz hängen (z. B. Host-Only oder internes vSwitch-Konzept).
+   - Erstmal in das gewünschte interne lokale VM-Netz hängen (z. B. Host-Only oder internes vSwitch-Konzept).
 5. Ubuntu installieren:
    - Benutzer z. B. `admin`
    - SSH-Server mitinstallieren
@@ -106,7 +117,7 @@ npm install
 
 ```env
 PORT=3000
-DB_HOST=192.168.10.10
+DB_HOST=<WINDOWS_MYSQL_IP>
 DB_PORT=3306
 DB_USER=webapp_user
 DB_PASSWORD=SEHR_STARKES_PASSWORT
@@ -126,7 +137,7 @@ Auf Ubuntu:
 
 ```bash
 sudo apt install -y mysql-client
-mysql -h 192.168.10.10 -P 3306 -u webapp_user -p webapp_prod
+mysql -h <WINDOWS_MYSQL_IP> -P 3306 -u webapp_user -p webapp_prod
 ```
 
 Dann in MySQL:
@@ -189,14 +200,14 @@ sudo ufw default deny incoming
 sudo ufw default allow outgoing
 sudo ufw allow OpenSSH
 sudo ufw allow from 127.0.0.1 to any port 3000 proto tcp
-sudo ufw allow from <REVERSE_PROXY_ODER_PFSENSE_IP> to any port 3000 proto tcp
+sudo ufw allow from <AZURE_VNET_ODER_VPN_SUBNET> to any port 3000 proto tcp
 sudo ufw enable
 sudo ufw status verbose
 ```
 
 Wichtig:
 - Port `3000` bleibt intern und wird **nicht** direkt aus dem Internet freigegeben.
-- Externe Zugriffe laufen über `443` am Reverse-Proxy/API-Gateway.
+- Externe Zugriffe laufen über `443` auf Azure; Weiterleitung ins lokale Netz erfolgt nur durch den VPN-Tunnel.
 
 ---
 
@@ -207,13 +218,13 @@ PfSense soll den Verkehr sichtbar/regulierbar machen.
 1. pfSense-VM in VMware erstellen.
 2. Zwei Interfaces:
    - WAN (Richtung Internet/Upstream)
-   - LAN (dein internes Lab-Netz)
+   - LAN (dein internes lokales Netz)
 3. LAN-IP setzen, z. B. `192.168.10.1/24`.
 4. DHCP optional auf pfSense aktivieren (oder statische IPs vergeben).
 5. Firewall-Regeln im LAN/WAN:
-   - Erlaube Ubuntu -> MySQL: TCP 3306 zu `192.168.10.10`
-   - Erlaube Reverse-Proxy -> Ubuntu: TCP 3000 zu `192.168.10.20`
-   - Erlaube Internet -> Reverse-Proxy: TCP 443
+   - Erlaube Ubuntu -> MySQL: TCP 3306 zu `<WINDOWS_MYSQL_IP>`
+   - Erlaube Azure-VNet (über VPN) -> Ubuntu: TCP 3000 zu `<UBUNTU_BACKEND_IP>`
+   - Erlaube pfSense-IPsec/VPN-Traffic gemäß Tunnel-Policy
    - Blockiere Internet -> Ubuntu: TCP 3000
    - Blockiere unnötige Any-Any-Regeln
 6. Logs prüfen (`Status -> System Logs -> Firewall`).

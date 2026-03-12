@@ -25,10 +25,12 @@ Diese Anleitung übersetzt die offenen Punkte aus dem letzten Chat in eine **kon
 - **Datenbank (MySQL)** läuft auf Plattform C (lokal/LAN-Server)
 - DB ist **nicht öffentlich erreichbar**; nur Backend darf zugreifen.
 
+> Hinweis zur realen Umgebung: Die Umsetzung erfolgt **nicht in einem Lab-Netzwerk**, sondern auf einem lokalen Rechner mit Windows (MySQL) sowie lokalen VMs (Ubuntu + pfSense). Azure ist die reale Microsoft-Cloud; aktuell besteht dort vor allem Zugriff per Login und die schrittweise Bereitstellung folgt in Phase 1.3.
+
 ### Architektur-Wahl (Platzierung) für Sprint 5–7
 
 - Verbindlich für die aktuelle Umsetzung: **FE in Azure, BE auf Ubuntu-VM, DB lokal**.
-- Öffentlicher Zugriff nur via `443`; `3000` (Backend) und `3306` (DB) bleiben intern.
+- Öffentlicher Zugriff nur via `443` in Azure; `3000` (Backend) und `3306` (DB) bleiben lokal intern und werden über Site-to-Site-VPN angebunden.
 - Ein möglicher späterer Evolutionsschritt (nicht Teil der aktuellen Abnahme) ist die Verlagerung des Backends nach Azure.
 
 ---
@@ -42,7 +44,7 @@ Diese Anleitung übersetzt die offenen Punkte aus dem letzten Chat in eine **kon
 
 ## Qualitätsvorgaben (verbindlich für alle Phasen)
 
-- Öffentliche Exposition nur über `443` (HTTPS), **kein direkter Internetzugriff auf Backend-Port `3000`**.
+- Öffentliche Exposition nur über `443` (HTTPS) auf Azure-Komponenten, **kein direkter Internetzugriff auf lokalen Backend-Port `3000`**.
 - Datenbank-Port `3306` bleibt intern und ist nur vom Backend erreichbar.
 - Secrets nicht im Repository speichern; produktiv Secret-Store nutzen.
 - Für Netzwerk/Security muss eine nachvollziehbare Port-Matrix in Phase 2 gepflegt werden.
