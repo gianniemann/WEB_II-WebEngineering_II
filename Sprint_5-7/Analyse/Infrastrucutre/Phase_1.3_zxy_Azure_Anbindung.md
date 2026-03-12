@@ -15,11 +15,9 @@ Am Ende hast du:
 
 ---
 
-## 1) Verbindliche Architektur für dieses Projekt
+## 1)  Architektur 
 
-Für dieses Projekt ist **ausschließlich Variante A** gültig:
-
-### Variante A (verbindlich): Nur Frontend in Azure
+### Frontend in Azure
 - Azure hostet nur die statische Oberfläche.
 - Backend bleibt auf lokaler Ubuntu-VM.
 - MySQL bleibt lokal auf Windows.
