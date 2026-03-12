@@ -191,3 +191,9 @@ Zusätzliche Entscheidungsregel für spätere Iterationen (nach Sprint 7):
 - `Auftrag/`: formaler Arbeitsauftrag / Aufgabenbeschreibung
 - `Analyse/`: dieses Konzeptdokument
 - `Abgabe/`: Umsetzungsnachweise (Tests, Doku, Belege)
+
+
+## Ergänzung: Praxisnahe Known-Issues für wiederholte Setups
+
+Für typische, schnell behebbare Infrastruktur-Probleme beim erneuten Aufbau siehe:
+- `Sprint_5-7/Analyse/Infrastrucutre/Bekannte_Probleme_und_Quickfixes.md`

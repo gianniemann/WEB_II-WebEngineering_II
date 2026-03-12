@@ -15,7 +15,7 @@ npm start
 
 - `PORT` (default: `3000`)
 - `ALLOWED_ORIGIN` (default: `*`)
-- `API_KEY` (wenn gesetzt: Pflicht für schreibende Endpunkte)
+- `API_KEY` (**verpflichtend**: schreibende Endpunkte antworten sonst mit `503`)
 - `LOG_DIR` (default: `../logs`)
 - `DB_HOST` (default: `127.0.0.1`)
 - `DB_PORT` (default: `3306`)

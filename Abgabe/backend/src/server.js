@@ -17,6 +17,10 @@ const ERROR_LOG_FILE = path.join(LOG_DIR, "errors.log");
 
 fs.mkdirSync(LOG_DIR, { recursive: true });
 
+if (!API_KEY) {
+    console.warn("[SECURITY] API_KEY is not set. Protected endpoints will return HTTP 503 until configured.");
+}
+
 function logLine(filePath, message) {
     const timestamp = new Date().toISOString();
     fs.appendFile(filePath, `[${timestamp}] ${message}\n`, (err) => {
@@ -44,7 +48,8 @@ app.use((req, res, next) => {
 
 function requireApiKey(req, res, next) {
     if (!API_KEY) {
-        return next();
+        logLine(ERROR_LOG_FILE, `${req.method} ${req.originalUrl} API key enforcement misconfigured (API_KEY missing).`);
+        return res.status(503).json({ message: "API key protection is not configured on the server." });
     }
 
     const received = req.header("x-api-key");
